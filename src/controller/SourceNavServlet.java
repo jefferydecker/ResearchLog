@@ -51,7 +51,7 @@ public class SourceNavServlet extends HttpServlet {
 			
 			try {
 			Integer tempId = Integer.parseInt(request.getParameter("id"));
-			Source bandToDelete = dao.searchForSourceById(tempId);
+			Source sourceToDelete = dao.searchForSourceById(tempId);
 			dao.deleteSource(sourceToDelete);
 			getServletContext().getRequestDispatcher("/index.html").forward(request, response);		
 			}

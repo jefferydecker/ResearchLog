@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<form action = "AddSourceServlet" method="post">
 	Title: <input type="text" name="srcTitle" value="${sourceToEdit.srcTitle}">
 		Author: <input type="text" name="srcAuthor" value="${sourceToEdit.srcAuthor}">
 		Publication: <input type="text" name="srcPublication" value="${sourceToEdit.srcPublication}">

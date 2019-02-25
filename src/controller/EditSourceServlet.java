@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Citation;
 import model.Source;
 
 /**
@@ -57,11 +58,11 @@ public class EditSourceServlet extends HttpServlet {
 		String sourceLocation = request.getParameter("srcLocation");
 		
 		Integer tempId = Integer.parseInt(request.getParameter("id"));
-		Source bandToUpdate = dao.searchForSourceById(tempId);
-		sourceToUpdate.setSourceTitle(sourceTitle);
-		sourceToUpdate.setSourceAuthor(sourceAuthor);
-		sourceToUpdate.setSourcePublication(sourcePublication);
-		sourceToUpdate.setSourceLocation(sourceLocation);
+		Source sourceToUpdate = dao.searchForSourceById(tempId);
+		sourceToUpdate.setSrcTitle(sourceTitle);
+		sourceToUpdate.setSrcAuthor(sourceAuthor);
+		sourceToUpdate.setSrcPublication(sourcePublication);
+		sourceToUpdate.setSrcLocation(sourceLocation);
 		dao.updateSource(sourceToUpdate);
 		getServletContext().getRequestDispatcher("/index.html").forward(request, response);
 	}
