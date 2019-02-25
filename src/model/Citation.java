@@ -1,6 +1,8 @@
 package model;
 
+
 import java.util.Date;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,13 +29,14 @@ public class Citation {
 	@Column(name="refbody")
 	private String refBody;
 	@Column(name="locdetail")
+
 	private String locDetail;
+
 	@ManyToOne
 	@JoinColumns({
 			@JoinColumn(name = "SRCID", referencedColumnName = "SRCID") })
 	private Source source;
 
-	
 	public Citation() {
 		super();
 	}

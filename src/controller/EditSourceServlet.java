@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,6 +31,17 @@ public class EditSourceServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		//----------------
+		CitationHelper ch = new CitationHelper();
+		List<Citation> abc = ch.showAllItems();
+		request.setAttribute("allItems", abc);
+
+		if(abc.isEmpty()){
+			request.setAttribute("allItems", " ");
+		}
+
+		getServletContext().getRequestDispatcher("/citation-by-source.jsp").forward(request, response);
+		//----------------
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
