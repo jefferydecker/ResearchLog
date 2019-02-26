@@ -55,19 +55,19 @@ public class Citation {
 		this.dateFound = dateFound;
 	}
 
-	public int getRefBody() {
+	public String getRefBody() {
 		return refBody;
 	}
 
-	public void setRefBody(int refBody) {
+	public void setRefBody(String refBody) {
 		this.refBody = refBody;
 	}
 
-	public int getLocDetail() {
+	public String getLocDetail() {
 		return locDetail;
 	}
 
-	public void setLocDetail(int locDetail) {
+	public void setLocDetail(String locDetail) {
 		this.locDetail = locDetail;
 	}
 
