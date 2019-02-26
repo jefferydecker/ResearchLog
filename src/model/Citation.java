@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -28,10 +27,11 @@ public class Citation {
 	@Column(name="locdetail")
 	private int locDetail;
 	
-	@ManyToOne
-	@JoinColumns({
-			@JoinColumn(name = "SRCID", referencedColumnName = "SRCID") })
-	private Source source;
+//	@ManyToOne
+//			//	@JoinColumns({
+//			//			@JoinColumn(name = "SRCID", referencedColumnName = "SRCID") })
+//	@JoinColumn(name = "SRCID")
+//	private Source source;
 
 	public Citation() {
 		super();

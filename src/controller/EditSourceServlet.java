@@ -34,7 +34,7 @@ public class EditSourceServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//----------------
 		CitationHelper ch = new CitationHelper();
-		List<Citation> abc = ch.showAllItems();
+		List<Citation> abc = ch.showAllCitations();
 		request.setAttribute("allItems", abc);
 
 		if(abc.isEmpty()){
