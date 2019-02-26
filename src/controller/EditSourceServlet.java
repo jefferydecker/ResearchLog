@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Citation;
 import model.Source;
 
 /**
@@ -32,19 +33,8 @@ public class EditSourceServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//----------------
-		CitationHelper ch = new CitationHelper();
-		List<Citation> abc = ch.showAllItems();
-		request.setAttribute("allItems", abc);
-
-		if(abc.isEmpty()){
-			request.setAttribute("allItems", " ");
-		}
-
-		getServletContext().getRequestDispatcher("/citation-by-source.jsp").forward(request, response);
-		//----------------
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

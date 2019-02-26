@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -23,7 +24,7 @@ public class Citation {
 	@Column(name = "srcid")
 	private int srcId;
 	@Column(name = "datefound")
-	private Date dateFound;
+	private LocalDate dateFound;
 	@Column(name = "refbody")
 	private String refBody;
 	@Column(name = "locdetail")
@@ -34,11 +35,17 @@ public class Citation {
 	@JoinColumns({ @JoinColumn(name = "SRCID", referencedColumnName = "SRCID") })
 	private Source source;
 
-	public Citation(String srcId2, String date, String body, Source source2) {
+	public Citation() {
+		super();
+		
+	}
+	
+	
+	public Citation(String srcId2, Date dateFound, String body, Source source2) {
 		super();
 	}
 
-	public Citation(int citeId, int srcId, Date dateFound, String refBody, String locDetail) {
+	public Citation(int citeId, int srcId, LocalDate dateFound, String refBody, String locDetail) {
 		super();
 		this.citeId = citeId;
 		this.srcId = srcId;
@@ -47,11 +54,16 @@ public class Citation {
 		this.locDetail = locDetail;
 	}
 
-	public Date getDateFound() {
+	public Citation(String srcId, LocalDate dateFound, String body, Source source) {
+		// TODO Auto-generated constructor stub
+	}
+
+
+	public LocalDate getDateFound() {
 		return dateFound;
 	}
 
-	public void setDateFound(Date dateFound) {
+	public void setDateFound(LocalDate dateFound) {
 		this.dateFound = dateFound;
 	}
 

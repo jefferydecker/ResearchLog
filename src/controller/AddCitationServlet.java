@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -33,19 +34,20 @@ public class AddCitationServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String srcId = request.getParameter("srcId");
-		String date = request.getParameter("dateFound");
+		String srcId = request.getParameter("srcId");	
 		String body = request.getParameter("refBody");
 		String location = request.getParameter("locDetail");
 		String source = request.getParameter("source");
-		
+		String month = request.getParameter("month");
+		String day = request.getParameter("day");
+		String year = request.getParameter("year");
+		LocalDate ld;
+		try {
+			ld = LocalDate.of(Integer.parseInt(year),
+					Integer.parseInt(month), Integer.parseInt(day));
+		} catch(NumberFormatException ex) {
+			ld = LocalDate.now();
+		}
 		SourceHelper sh = new SourceHelper();
 		List<Source> sourceList  = sh.showAllSources();
 		int temp = 0;
@@ -55,11 +57,17 @@ public class AddCitationServlet extends HttpServlet {
 			}
 		}
 		
-		Citation c = new Citation(srcId, date, body, sourceList.get(temp));
-		MusicianHelper dao = new MusicianHelper();
-		dao.insertMusician(m);
-		getServletContext().getRequestDispatcher("/ViewAllMusiciansServlet").forward(request, response);
+		Citation c = new Citation(srcId, ld, body, sourceList.get(temp));
+		CitationHelper dao = new CitationHelper();
+		dao.insertCitation(c);
+		getServletContext().getRequestDispatcher("/ViewAllCitationsServlet").forward(request, response);
 	}
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
 
 }
