@@ -16,7 +16,7 @@ public class CitationHelper {
 	static EntityManagerFactory emfactory =	
 		Persistence.createEntityManagerFactory("ResearchLog");
 	
-	public void insertItem(Citation c) {
+	public void insertCitation(Citation c) {
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
 		em.persist(c);
@@ -24,22 +24,20 @@ public class CitationHelper {
 		em.close();
 	}
 	
-	public	List<Citation> showAllItems() {
+	public	List<Citation> showAllCitations() {
 		EntityManager	em	=	emfactory.createEntityManager();
-		List<Citation> allItems = em.createQuery("SELECT i FROM Citation i").getResultList();
-		return	allItems;
+		List<Citation> allCitations = em.createQuery("SELECT i FROM Citation i").getResultList();
+		return	allCitations;
 		}
 
-	public void deleteItem(Citation	toDelete) {		// TODO modify for ResearchLog
+	public void deleteCitation(Citation	toDelete) {		// TODO modify for ResearchLog
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
 		TypedQuery<Citation> typedQuery = em.createQuery("select c from " +
-			"Citation c where c.store = :selectedStore and c.item = :" +
-			"selectedItem", Citation.class);
+			"Citation c where c.citeID = :selectedciteID", Citation.class);
 		
 		//Substitute parameter with actual data from the toDelete item
-		typedQuery.setParameter("selectedStore", toDelete.getStore());
-		typedQuery.setParameter("selectedItem", toDelete.getItem());
+		typedQuery.setParameter("selectedCiteID", toDelete.getCiteID());
 		
 		//we only want one result
 		typedQuery.setMaxResults(1);
@@ -53,7 +51,7 @@ public class CitationHelper {
 		em.close();
 	}
 
-	public Citation searchForItemById(int idToEdit) {
+	public Citation searchForCitationById(int idToEdit) {
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
 		Citation found = em.find(Citation.class, idToEdit);
@@ -61,7 +59,7 @@ public class CitationHelper {
 		return found;
 	}
 
-	public void updateItem(Citation toEdit) {
+	public void updateCitation(Citation toEdit) {
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
 		em.merge(toEdit);
@@ -69,31 +67,7 @@ public class CitationHelper {
 		em.close();
 	}
 
-	public List<Citation> searchForItemByStore(String storeName) {
-	// TODO modify for ResearchLog
-		EntityManager em = emfactory.createEntityManager();
-		em.getTransaction().begin();
-		TypedQuery<Citation> typedQuery = em.createQuery("select c from " +
-			"Citation c where c.store = :selectedStore",	Citation.class);
-		typedQuery.setParameter("selectedStore", storeName);
-		
-		List<Citation> foundItems = typedQuery.getResultList();
-		em.close();
-		return foundItems;
-	}
 
-	public List<Citation> searchForItemByItem(String itemName) {
-	// TODO modify for ResearchLog
-		EntityManager em	=	emfactory.createEntityManager();
-		em.getTransaction().begin();
-		TypedQuery<Citation>	typedQuery	=	em.createQuery("select c from " +
-		"Citation c where c.item = :selectedItem", Citation.class);
-		typedQuery.setParameter("selectedItem", itemName);
-		
-		List<Citation> foundItems = typedQuery.getResultList();
-		em.close();
-		return foundItems;
-	}
 	
 	public void cleanUp(){
 		emfactory.close();
