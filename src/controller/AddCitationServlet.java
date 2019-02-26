@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,16 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import model.Source;
 
 /**
- * Servlet implementation class AddSourceServlet
+ * Servlet implementation class AddCitationServlet
  */
-@WebServlet("/AddSourceServlet")
-public class AddSourceServlet extends HttpServlet {
+@WebServlet("/AddCitationServlet")
+public class AddCitationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddSourceServlet() {
+    public AddCitationServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,14 +38,12 @@ public class AddSourceServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String title = request.getParameter("srcTitle");
-		String author = request.getParameter("srcAuthor");
-		String publication = request.getParameter("srcPublication");
-		String location = request.getParameter("srcLocation");
-		Source s = new Source(title, author, publication, location);
-		SourceHelper sh = new SourceHelper();
-		sh.insertSource(s);
+		String dateFound = request.getParameter("dateFound");
+		String refBody = request.getParameter("refBody");
+		String locDetail = request.getParameter("locDetail");
+		Source s = new Source(dateFound, refBody, locDetail);
+		CitationHelper ch = new CitationHelper();
+		ch.insertSource(s);
 		getServletContext().getRequestDispatcher("/index.html").forward(request, response);
 	}
 

@@ -1,6 +1,9 @@
 package model;
 
 
+import java.util.Date;
+
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,12 +25,13 @@ public class Citation {
 	@Column(name="srcid")
 	private int srcId;
 	@Column(name="datefound")
-	private int dateFound;
+	private Date dateFound;
 	@Column(name="refbody")
-	private int refBody;
+	private String refBody;
 	@Column(name="locdetail")
-	private int locDetail;
-	
+
+	private String locDetail;
+
 	@ManyToOne
 	@JoinColumns({
 			@JoinColumn(name = "SRCID", referencedColumnName = "SRCID") })
@@ -37,7 +41,7 @@ public class Citation {
 		super();
 	}
 
-	public Citation(int refId, int srcId, int dateFound, int refBody, int locDetail) {
+	public Citation(int refId, int srcId, Date dateFound, String refBody, String locDetail) {
 		super();
 		this.refId = refId;
 		this.srcId = srcId;
@@ -46,11 +50,11 @@ public class Citation {
 		this.locDetail = locDetail;
 	}
 
-	public int getDateFound() {
+	public Date getDateFound() {
 		return dateFound;
 	}
 
-	public void setDateFound(int dateFound) {
+	public void setDateFound(Date dateFound) {
 		this.dateFound = dateFound;
 	}
 
