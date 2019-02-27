@@ -33,6 +33,8 @@ public class EditSourceServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//----------------
+
+
 		CitationHelper ch = new CitationHelper();
 		List<Citation> abc = ch.showAllCitations();
 		request.setAttribute("allItems", abc);
@@ -43,9 +45,8 @@ public class EditSourceServlet extends HttpServlet {
 
 		getServletContext().getRequestDispatcher("/citation-by-source.jsp").forward(request, response);
 		//----------------
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
 
+	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

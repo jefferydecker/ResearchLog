@@ -16,7 +16,7 @@ public class CitationHelper {
 	static EntityManagerFactory emfactory =	
 		Persistence.createEntityManagerFactory("ResearchLog");
 	
-	public void insertItem(Citation c) {
+	public void insertCitation(Citation c) {
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
 		em.persist(c);
@@ -26,9 +26,12 @@ public class CitationHelper {
 	
 	public	List<Citation> showAllCitations() {
 		EntityManager	em	=	emfactory.createEntityManager();
-		List<Citation> allItems = em.createQuery("SELECT i FROM Citation i").getResultList();
-		return	allItems;
-	}
+
+		List<Citation> allCitations = em.createQuery("SELECT i FROM Citation i").getResultList();
+		return	allCitations;
+		}
+
+
 
 	public void deleteCitation(Citation	toDelete) {
 		EntityManager em = emfactory.createEntityManager();
@@ -37,7 +40,8 @@ public class CitationHelper {
 			"Citation c where c.refId = :selectedRefId", Citation.class);
 		
 		//Substitute parameter with actual data from the toDelete item
-		typedQuery.setParameter("selectedRefId", toDelete.getRefId());
+		typedQuery.setParameter("selectedRefId", toDelete.getCiteID());
+
 		
 		//we only want one result
 		typedQuery.setMaxResults(1);
@@ -50,6 +54,7 @@ public class CitationHelper {
 		em.getTransaction().commit();
 		em.close();
 	}
+
 
 	public Citation searchForCitationByRefId(int idToEdit) {
 		EntityManager em = emfactory.createEntityManager();
@@ -66,36 +71,6 @@ public class CitationHelper {
 		em.getTransaction().commit();
 		em.close();
 	}
-
-// Drew, do we have any need to search by anything other than refId? 
-//
-//	public List<Citation> searchForItemByStore(String storeName) {
-//	// TODO modify for ResearchLog
-//		EntityManager em = emfactory.createEntityManager();
-//		em.getTransaction().begin();
-//		TypedQuery<Citation> typedQuery = em.createQuery("select c from " +
-//			"Citation c where c.store = :selectedStore",	Citation.class);
-//		typedQuery.setParameter("selectedStore", storeName);
-//		
-//		List<Citation> foundItems = typedQuery.getResultList();
-//		em.close();
-//		return foundItems;
-//	}
-//
-//	public List<Citation> searchForItemByItem(String itemName) {
-//	// TODO modify for ResearchLog
-//		EntityManager em	=	emfactory.createEntityManager();
-//		em.getTransaction().begin();
-//		TypedQuery<Citation>	typedQuery	=	em.createQuery("select c from " +
-//		"Citation c where c.item = :selectedItem", Citation.class);
-//		typedQuery.setParameter("selectedItem", itemName);
-//		
-//		List<Citation> foundItems = typedQuery.getResultList();
-//		em.close();
-//		return foundItems;
-//	}
-//
-//
 	
 	public void cleanUp(){
 		emfactory.close();

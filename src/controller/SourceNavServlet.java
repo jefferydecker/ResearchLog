@@ -85,7 +85,7 @@ public class SourceNavServlet extends HttpServlet {
 				List<Citation> sourceCitations = dao.viewSourceCitations(sourceToView);
 				request.setAttribute("sourceCitations", sourceCitations	);
 				request.setAttribute("bandName", sourceToView);
-				getServletContext().getRequestDispatcher("/CitationListBySource.jsp").forward(request, response);		
+				getServletContext().getRequestDispatcher("/citation-by-source.jsp").forward(request, response);		
 				}
 				catch (NumberFormatException e) {
 					System.out.println("Forgot to click a button.");

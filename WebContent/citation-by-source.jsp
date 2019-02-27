@@ -27,9 +27,9 @@
  </c:forEach>
 </c:forEach>
 </table>
-<input type = "submit" value = "edit" name="doThisToItem">
-<input type = "submit" value = "delete" name="doThisToItem">
-<input type="submit" value = "add" name = "doThisToItem">
+<input type = "submit" value = "edit" name="doThisToCitation">
+<input type = "submit" value = "delete" name="doThisToCitation">
+<input type="submit" value = "add" name = "doThisToCitation">
 </form>
 <a href="AddSource.jsp">Add a new Source</a>
 </body>

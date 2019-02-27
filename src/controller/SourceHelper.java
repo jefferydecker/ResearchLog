@@ -36,8 +36,7 @@ public class SourceHelper {
 				em.createQuery("SELECT s FROM Source s").getResultList();
 		return allSources;
 	}
-	
-//--------------------------------/
+
 	public void deleteSource(Source toDelete) {
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
@@ -69,19 +68,6 @@ public class SourceHelper {
 		em.close();
 	}
 
-	public List<Source> searchForSourceByTitle(String title) {
-		// TODO Auto-generated method stub
-		EntityManager em = emfactory.createEntityManager();
-		em.getTransaction().begin();
-		TypedQuery<Source> typedQuery = em.createQuery(
-				"select r from sources s where s.title = :selectedTitle", Source.class);
-		typedQuery.setParameter("selectedTitle", title);
-
-		List<Source> foundItems = typedQuery.getResultList();
-		em.close();
-		return foundItems;
-	}
-
 	public void cleanUp(){
 		emfactory.close();
 	
@@ -100,6 +86,4 @@ public class SourceHelper {
 		return foundCitations;
 	}
 
-//--------------------------------/
-	
 }

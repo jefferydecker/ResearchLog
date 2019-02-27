@@ -1,6 +1,7 @@
 package model;
 
 
+
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -17,37 +19,55 @@ import javax.persistence.Table;
 public class Citation {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="refid")
-	private int refId;
-	@Column(name="srcid")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "citeid")
+	private int citeId;
+	@Column(name = "srcid")
 	private int srcId;
-	@Column(name="datefound")
-	private String dateFound;		//change to LocalDate type after adding converters
-	@Column(name="refbody")
+
+	@Column(name = "datefound")
+	private LocalDate dateFound;
+	@Column(name = "refbody")
 	private String refBody;
-	@Column(name="locdetail")
+	@Column(name = "locdetail")
+
 	private String locDetail;
 
+	/*@ManyToOne
+	@JoinColumns({ @JoinColumn(name = "SRCID", referencedColumnName = "SRCID") })*/
+	private Source source;
 
 	public Citation() {
 		super();
+		
 	}
+	
 
-	public Citation(int refId, int srcId, String dateFound, String refBody, String locDetail) {
+	public Citation(int citeId, int srcId, LocalDate dateFound, String refBody, String locDetail, Source source) {
 		super();
-		this.refId = refId;
+		this.citeId = citeId;
 		this.srcId = srcId;
 		this.dateFound = dateFound;
 		this.refBody = refBody;
 		this.locDetail = locDetail;
+		this.source = source;
 	}
 
-	public String getDateFound() {
+
+	public Citation(String srcId, LocalDate ld, String body, Source source) {
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+
+
+	public LocalDate getDateFound() {
 		return dateFound;
 	}
 
-	public void setDateFound(String dateFound) {
+	public void setDateFound(LocalDate dateFound) {
+
 		this.dateFound = dateFound;
 	}
 
@@ -67,15 +87,12 @@ public class Citation {
 		this.locDetail = locDetail;
 	}
 
-	public int getRefId() {
-		return refId;
+	public int getCiteID() {
+		return citeId;
 	}
 
 	public int getSrcId() {
 		return srcId;
 	}
-	
-	
-	
-	
+
 }
