@@ -10,20 +10,20 @@
 <body>
 <form method = "post" action = "">
 <table>
-<c:forEach items="${requestScope.allItems}" var="currentsource">
-<tr>
- <td><input type="radio" name="id" value="${currentsource.id}"></td>
- <td><h2>${currentsource.title}</h2></td>
- <td>${currentsource.author}</td>
- <td>${currentsource.srcloc}</td></tr>
- <tr><td colspan="3">Trip Date: ${currentsource.tripDate}</td></tr>
- <tr><td colspan="3">Shopper:
-${currentsource.shopper.shopperName}</td></tr>
- <c:forEach var = "listVal" items = "${currentlist.listOfItems}">
- <tr><td></td><td colspan="3">
- ${listVal.store}, ${listVal.item}
- </td>
- </tr>
+<c:forEach items="${requestScope.allSources}" var="currentsource">
+	<tr>
+	 <td><h4>-></h4></td>
+	 <td><h4>${currentsource.srcTitle}</h4></td>
+	 <td>${currentsource.srcAuthor}</td>
+	 <td>${currentsource.srcPublication}</td>
+	 <td>${currentsource.srcLocation}</td>
+ 	</tr>
+	 <c:forEach items = "${currentsource.citationList}" var = "currentcitation">
+		 <tr><td><input type="radio" name="id" value="${currentcitation.refId}"></td>
+		 	<td>${currentcitation.refBody}</td>
+			<td>${currentcitation.dateFound}</td>
+			<td>${currentcitation.locDetail}</td>
+		 </tr>
  </c:forEach>
 </c:forEach>
 </table>
@@ -31,7 +31,6 @@ ${currentsource.shopper.shopperName}</td></tr>
 <input type = "submit" value = "delete" name="doThisToItem">
 <input type="submit" value = "add" name = "doThisToItem">
 </form>
-<a href="addItemsForListServlet">Create a new List</a>
-<a href="index.html">Insert a new item</a>
+<a href="AddSource.jsp">Add a new Source</a>
 </body>
 </html>

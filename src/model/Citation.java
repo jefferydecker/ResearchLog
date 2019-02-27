@@ -1,7 +1,8 @@
 package model;
 
+
+
 import java.time.LocalDate;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,12 +10,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "citation")
+@Table(name="citations")
 public class Citation {
 
 	@Id
@@ -23,6 +23,7 @@ public class Citation {
 	private int citeId;
 	@Column(name = "srcid")
 	private int srcId;
+
 	@Column(name = "datefound")
 	private LocalDate dateFound;
 	@Column(name = "refbody")
@@ -31,9 +32,9 @@ public class Citation {
 
 	private String locDetail;
 
-	@ManyToOne
+	/*@ManyToOne
 	@JoinColumns({ @JoinColumn(name = "SRCID", referencedColumnName = "SRCID") })
-	private Source source;
+	private Source source;*/
 
 	public Citation() {
 		super();
@@ -46,13 +47,8 @@ public class Citation {
 	}
 
 	public Citation(int citeId, int srcId, LocalDate dateFound, String refBody, String locDetail) {
-		super();
-		this.citeId = citeId;
-		this.srcId = srcId;
-		this.dateFound = dateFound;
-		this.refBody = refBody;
-		this.locDetail = locDetail;
-	}
+
+
 
 	public Citation(String srcId, LocalDate dateFound, String body, Source source) {
 		// TODO Auto-generated constructor stub
@@ -64,6 +60,7 @@ public class Citation {
 	}
 
 	public void setDateFound(LocalDate dateFound) {
+
 		this.dateFound = dateFound;
 	}
 
