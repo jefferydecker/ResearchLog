@@ -11,8 +11,7 @@ import model.Citation;
 import model.Source;
 
 public class SourceHelper {
-	static EntityManagerFactory emfactory =
-			Persistence.createEntityManagerFactory("ResearchLog");
+	static EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("ResearchLog");
 
 	public void insertSource(Source s) {
 		EntityManager em = emfactory.createEntityManager();

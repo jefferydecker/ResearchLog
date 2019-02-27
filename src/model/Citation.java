@@ -1,8 +1,7 @@
 package model;
 
 
-import java.util.Date;
-
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="citation")
+@Table(name="citations")
 public class Citation {
 
 	@Id
@@ -24,33 +23,18 @@ public class Citation {
 	@Column(name="srcid")
 	private int srcId;
 	@Column(name="datefound")
-	private Date dateFound;
+	private String dateFound;		//change to LocalDate type after adding converters
 	@Column(name="refbody")
 	private String refBody;
 	@Column(name="locdetail")
-<<<<<<< HEAD
-	private int locDetail;
-	
-//	@ManyToOne
-//			//	@JoinColumns({
-//			//			@JoinColumn(name = "SRCID", referencedColumnName = "SRCID") })
-//	@JoinColumn(name = "SRCID")
-//	private Source source;
-=======
-
 	private String locDetail;
 
-	@ManyToOne
-	@JoinColumns({
-			@JoinColumn(name = "SRCID", referencedColumnName = "SRCID") })
-	private Source source;
->>>>>>> e41456e03a0914011f7b7351e6182289ac479c29
 
 	public Citation() {
 		super();
 	}
 
-	public Citation(int refId, int srcId, Date dateFound, String refBody, String locDetail) {
+	public Citation(int refId, int srcId, String dateFound, String refBody, String locDetail) {
 		super();
 		this.refId = refId;
 		this.srcId = srcId;
@@ -59,27 +43,27 @@ public class Citation {
 		this.locDetail = locDetail;
 	}
 
-	public Date getDateFound() {
+	public String getDateFound() {
 		return dateFound;
 	}
 
-	public void setDateFound(Date dateFound) {
+	public void setDateFound(String dateFound) {
 		this.dateFound = dateFound;
 	}
 
-	public int getRefBody() {
+	public String getRefBody() {
 		return refBody;
 	}
 
-	public void setRefBody(int refBody) {
+	public void setRefBody(String refBody) {
 		this.refBody = refBody;
 	}
 
-	public int getLocDetail() {
+	public String getLocDetail() {
 		return locDetail;
 	}
 
-	public void setLocDetail(int locDetail) {
+	public void setLocDetail(String locDetail) {
 		this.locDetail = locDetail;
 	}
 
