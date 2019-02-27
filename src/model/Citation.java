@@ -41,7 +41,7 @@ public class Citation {
 	}
 	
 	
-	public Citation(String srcId2, Date dateFound, String body, Source source2) {
+	public Citation(String srcId, LocalDate dateFound, String body, Source source) {
 		super();
 	}
 

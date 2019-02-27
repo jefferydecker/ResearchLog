@@ -47,7 +47,7 @@ public class SourceNavServlet extends HttpServlet {
 		 //no button has been selected
 		getServletContext().getRequestDispatcher("/index.html").forward(request, response);
 		
-		/*} else if (act.equals("delete")) {		
+		} else if (act.equals("delete")) {		
 			
 			try {
 			Integer tempId = Integer.parseInt(request.getParameter("id"));
@@ -61,7 +61,7 @@ public class SourceNavServlet extends HttpServlet {
 			finally {				
 				getServletContext().getRequestDispatcher("/index.html").forward(request, response);
 				
-			}*/
+			}
 	
 		} else if (act.equals("edit")) {
 			
