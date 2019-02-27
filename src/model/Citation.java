@@ -1,7 +1,8 @@
 package model;
 
+
+
 import java.time.LocalDate;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "citation")
+@Table(name="citations")
 public class Citation {
 
 	@Id
@@ -23,6 +24,7 @@ public class Citation {
 	private int citeId;
 	@Column(name = "srcid")
 	private int srcId;
+
 	@Column(name = "datefound")
 	private LocalDate dateFound;
 	@Column(name = "refbody")
@@ -31,8 +33,8 @@ public class Citation {
 
 	private String locDetail;
 
-	@ManyToOne
-	@JoinColumns({ @JoinColumn(name = "SRCID", referencedColumnName = "SRCID") })
+	/*@ManyToOne
+	@JoinColumns({ @JoinColumn(name = "SRCID", referencedColumnName = "SRCID") })*/
 	private Source source;
 
 	public Citation() {
@@ -40,23 +42,24 @@ public class Citation {
 		
 	}
 	
-	
-	public Citation(String srcId2, Date dateFound, String body, Source source2) {
-		super();
-	}
 
-	public Citation(int citeId, int srcId, LocalDate dateFound, String refBody, String locDetail) {
+	public Citation(int citeId, int srcId, LocalDate dateFound, String refBody, String locDetail, Source source) {
 		super();
 		this.citeId = citeId;
 		this.srcId = srcId;
 		this.dateFound = dateFound;
 		this.refBody = refBody;
 		this.locDetail = locDetail;
+		this.source = source;
 	}
 
-	public Citation(String srcId, LocalDate dateFound, String body, Source source) {
+
+	public Citation(String srcId, LocalDate ld, String body, Source source) {
 		// TODO Auto-generated constructor stub
 	}
+
+
+
 
 
 	public LocalDate getDateFound() {
@@ -64,6 +67,7 @@ public class Citation {
 	}
 
 	public void setDateFound(LocalDate dateFound) {
+
 		this.dateFound = dateFound;
 	}
 

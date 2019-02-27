@@ -33,7 +33,19 @@ public class EditSourceServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//----------------
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+
+		CitationHelper ch = new CitationHelper();
+		List<Citation> abc = ch.showAllCitations();
+		request.setAttribute("allItems", abc);
+
+		if(abc.isEmpty()){
+			request.setAttribute("allItems", " ");
+		}
+
+		getServletContext().getRequestDispatcher("/citation-by-source.jsp").forward(request, response);
+		//----------------
+
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -47,11 +59,11 @@ public class EditSourceServlet extends HttpServlet {
 		String sourceLocation = request.getParameter("srcLocation");
 		
 		Integer tempId = Integer.parseInt(request.getParameter("id"));
-		Source bandToUpdate = dao.searchForSourceById(tempId);
-		sourceToUpdate.setSourceTitle(sourceTitle);
-		sourceToUpdate.setSourceAuthor(sourceAuthor);
-		sourceToUpdate.setSourcePublication(sourcePublication);
-		sourceToUpdate.setSourceLocation(sourceLocation);
+		Source sourceToUpdate = dao.searchForSourceById(tempId);
+		sourceToUpdate.setSrcTitle(sourceTitle);
+		sourceToUpdate.setSrcAuthor(sourceAuthor);
+		sourceToUpdate.setSrcPublication(sourcePublication);
+		sourceToUpdate.setSrcLocation(sourceLocation);
 		dao.updateSource(sourceToUpdate);
 		getServletContext().getRequestDispatcher("/index.html").forward(request, response);
 	}

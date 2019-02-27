@@ -30,10 +30,7 @@ public class Source {
 	private String srcLocation;
 	
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="SRCID")			// Why don't we need this? Is it because
-										// we it knows the key of SOURCE and CITATION
-										// has a field with the same name?
-
+	@JoinColumn(name="SRCID")
 	private List<Citation> citationList;
 	
 	

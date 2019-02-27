@@ -47,11 +47,11 @@ public class SourceNavServlet extends HttpServlet {
 		 //no button has been selected
 		getServletContext().getRequestDispatcher("/index.html").forward(request, response);
 		
-		/*} else if (act.equals("delete")) {		
+		} else if (act.equals("delete")) {		
 			
 			try {
 			Integer tempId = Integer.parseInt(request.getParameter("id"));
-			Source bandToDelete = dao.searchForSourceById(tempId);
+			Source sourceToDelete = dao.searchForSourceById(tempId);
 			dao.deleteSource(sourceToDelete);
 			getServletContext().getRequestDispatcher("/index.html").forward(request, response);		
 			}
@@ -61,7 +61,7 @@ public class SourceNavServlet extends HttpServlet {
 			finally {				
 				getServletContext().getRequestDispatcher("/index.html").forward(request, response);
 				
-			}*/
+			}
 	
 		} else if (act.equals("edit")) {
 			
@@ -82,10 +82,10 @@ public class SourceNavServlet extends HttpServlet {
 				Integer tempId = Integer.parseInt(request.getParameter("id"));
 				Source sourceToView = dao.searchForSourceById(tempId);
 				
-				List<Citation> sourceCitations = dao.ViewCitationsBySource(sourceToView);
+				List<Citation> sourceCitations = dao.viewSourceCitations(sourceToView);
 				request.setAttribute("sourceCitations", sourceCitations	);
 				request.setAttribute("bandName", sourceToView);
-				getServletContext().getRequestDispatcher("/CitationListBySource.jsp").forward(request, response);		
+				getServletContext().getRequestDispatcher("/citation-by-source.jsp").forward(request, response);		
 				}
 				catch (NumberFormatException e) {
 					System.out.println("Forgot to click a button.");

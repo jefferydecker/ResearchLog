@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ViewAllSourcesServlet
+ * Servlet implementation class viewAllSourcesServlet
  */
-@WebServlet("/ViewAllSourcesServlet")
-public class ViewAllSourcesServlet extends HttpServlet {
+@WebServlet("/viewAllSourcesServlet")
+public class viewAllSourcesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewAllSourcesServlet() {
+    public viewAllSourcesServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,7 +27,7 @@ public class ViewAllSourcesServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		SourceHelper dao = new SourceHelper();
-		request.setAttribute("allBands", dao.showAllSources());
+		request.setAttribute("allSources", dao.showAllSources());
 		
 		if(dao.showAllSources().isEmpty()){
 		request.setAttribute("allSources", " ");		
@@ -35,7 +35,6 @@ public class ViewAllSourcesServlet extends HttpServlet {
 		
 		getServletContext().getRequestDispatcher("/SourceList.jsp").forward(request, response);
 	}
-
 	
 
 	/**
