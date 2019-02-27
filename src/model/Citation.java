@@ -8,12 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="citations")
+@Table(name="citation")
 public class Citation {
 
 	@Id
@@ -23,7 +21,7 @@ public class Citation {
 	@Column(name="srcid")
 	private int srcId;
 	@Column(name="datefound")
-	private String dateFound;		//change to LocalDate type after adding converters
+	private LocalDate dateFound;		//change to LocalDate type after adding converters
 	@Column(name="refbody")
 	private String refBody;
 	@Column(name="locdetail")
@@ -34,20 +32,19 @@ public class Citation {
 		super();
 	}
 
-	public Citation(int refId, int srcId, String dateFound, String refBody, String locDetail) {
+	public Citation(int srcId, LocalDate dateFound, String refBody, String locDetail) {
 		super();
-		this.refId = refId;
 		this.srcId = srcId;
 		this.dateFound = dateFound;
 		this.refBody = refBody;
 		this.locDetail = locDetail;
 	}
 
-	public String getDateFound() {
+	public LocalDate getDateFound() {
 		return dateFound;
 	}
 
-	public void setDateFound(String dateFound) {
+	public void setDateFound(LocalDate dateFound) {
 		this.dateFound = dateFound;
 	}
 
@@ -74,8 +71,5 @@ public class Citation {
 	public int getSrcId() {
 		return srcId;
 	}
-	
-	
-	
 	
 }

@@ -32,5 +32,6 @@
 <input type="submit" value = "add" name = "doThisToItem">
 </form>
 <a href="AddSource.jsp">Add a new Source</a>
+<a href="index.html">Home</a><br>
 </body>
 </html>

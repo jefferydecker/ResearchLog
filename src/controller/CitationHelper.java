@@ -16,7 +16,7 @@ public class CitationHelper {
 	static EntityManagerFactory emfactory =	
 		Persistence.createEntityManagerFactory("ResearchLog");
 	
-	public void insertItem(Citation c) {
+	public void insertCitation(Citation c) {
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
 		em.persist(c);

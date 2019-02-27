@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Citation;
 import model.Source;
 
 /**
@@ -30,7 +32,27 @@ public class AddCitationServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		int srcId = Integer.parseInt(request.getParameter("allSources"));
+		
+		String month = request.getParameter("month");
+		String day = request.getParameter("day");
+		String year = request.getParameter("year");
+
+		LocalDate dateFound;
+		try {
+			dateFound = LocalDate.of(Integer.parseInt(year),
+					Integer.parseInt(month), Integer.parseInt(day));
+		} catch(NumberFormatException ex) {
+			dateFound = LocalDate.now();
+		}
+
+		String refBody = request.getParameter("refBody");
+		String locDetail = request.getParameter("locDetail");
+		Citation c = new Citation(srcId, dateFound, refBody, locDetail);
+		CitationHelper ch = new CitationHelper();
+		ch.insertCitation(c);
+		getServletContext().getRequestDispatcher("/ViewAllServlet").forward(request, response);
+
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -38,13 +60,7 @@ public class AddCitationServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String dateFound = request.getParameter("dateFound");
-		String refBody = request.getParameter("refBody");
-		String locDetail = request.getParameter("locDetail");
-		Source s = new Source(dateFound, refBody, locDetail);
-		CitationHelper ch = new CitationHelper();
-		ch.insertSource(s);
-		getServletContext().getRequestDispatcher("/index.html").forward(request, response);
+		doGet(request, response);
 	}
 
 }
