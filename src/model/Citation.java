@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -13,45 +14,56 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="citation")
+@Table(name = "citation")
 public class Citation {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="refid")
-	private int refId;
-	@Column(name="srcid")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "citeid")
+	private int citeId;
+	@Column(name = "srcid")
 	private int srcId;
-	@Column(name="datefound")
-	private Date dateFound;
-	@Column(name="refbody")
+	@Column(name = "datefound")
+	private LocalDate dateFound;
+	@Column(name = "refbody")
 	private String refBody;
-	@Column(name="locdetail")
+	@Column(name = "locdetail")
+
 	private String locDetail;
+
 	@ManyToOne
-	@JoinColumns({
-			@JoinColumn(name = "SRCID", referencedColumnName = "SRCID") })
+	@JoinColumns({ @JoinColumn(name = "SRCID", referencedColumnName = "SRCID") })
 	private Source source;
 
-	
 	public Citation() {
+		super();
+		
+	}
+	
+	
+	public Citation(String srcId2, Date dateFound, String body, Source source2) {
 		super();
 	}
 
-	public Citation(int refId, int srcId, Date dateFound, String refBody, String locDetail) {
+	public Citation(int citeId, int srcId, LocalDate dateFound, String refBody, String locDetail) {
 		super();
-		this.refId = refId;
+		this.citeId = citeId;
 		this.srcId = srcId;
 		this.dateFound = dateFound;
 		this.refBody = refBody;
 		this.locDetail = locDetail;
 	}
 
-	public Date getDateFound() {
+	public Citation(String srcId, LocalDate dateFound, String body, Source source) {
+		// TODO Auto-generated constructor stub
+	}
+
+
+	public LocalDate getDateFound() {
 		return dateFound;
 	}
 
-	public void setDateFound(Date dateFound) {
+	public void setDateFound(LocalDate dateFound) {
 		this.dateFound = dateFound;
 	}
 
@@ -71,15 +83,12 @@ public class Citation {
 		this.locDetail = locDetail;
 	}
 
-	public int getRefId() {
-		return refId;
+	public int getCiteID() {
+		return citeId;
 	}
 
 	public int getSrcId() {
 		return srcId;
 	}
-	
-	
-	
-	
+
 }

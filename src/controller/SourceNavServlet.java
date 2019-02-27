@@ -47,7 +47,7 @@ public class SourceNavServlet extends HttpServlet {
 		 //no button has been selected
 		getServletContext().getRequestDispatcher("/index.html").forward(request, response);
 		
-		} else if (act.equals("delete")) {		
+		/*} else if (act.equals("delete")) {		
 			
 			try {
 			Integer tempId = Integer.parseInt(request.getParameter("id"));
@@ -61,7 +61,7 @@ public class SourceNavServlet extends HttpServlet {
 			finally {				
 				getServletContext().getRequestDispatcher("/index.html").forward(request, response);
 				
-			}
+			}*/
 	
 		} else if (act.equals("edit")) {
 			
@@ -82,7 +82,7 @@ public class SourceNavServlet extends HttpServlet {
 				Integer tempId = Integer.parseInt(request.getParameter("id"));
 				Source sourceToView = dao.searchForSourceById(tempId);
 				
-				List<Citation> sourceCitations = dao.viewSourceCitations(sourceToView);
+				List<Citation> sourceCitations = dao.ViewCitationsBySource(sourceToView);
 				request.setAttribute("sourceCitations", sourceCitations	);
 				request.setAttribute("bandName", sourceToView);
 				getServletContext().getRequestDispatcher("/CitationListBySource.jsp").forward(request, response);		
