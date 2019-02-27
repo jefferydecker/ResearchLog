@@ -30,14 +30,6 @@ public class SourceHelper {
 		return found;
 	}
 	
-	public Source searchForSourceById(int idToEdit) {
-		EntityManager em = emfactory.createEntityManager();
-		em.getTransaction().begin();
-		Source found = em.find(Source.class, idToEdit);
-		em.close();
-		return found;
-	}
-	
 	public List<Source> showAllSources() {
 		EntityManager em = emfactory.createEntityManager();
 		List<Source> allSources =
@@ -74,19 +66,6 @@ public class SourceHelper {
 		em.merge(toEdit);
 		em.getTransaction().commit();
 		em.close();
-	}
-
-	public List<Source> searchForSourceByTitle(String title) {
-		// TODO Auto-generated method stub
-		EntityManager em = emfactory.createEntityManager();
-		em.getTransaction().begin();
-		TypedQuery<Source> typedQuery = em.createQuery(
-				"select r from sources s where s.title = :selectedTitle", Source.class);
-		typedQuery.setParameter("selectedTitle", title);
-
-		List<Source> foundItems = typedQuery.getResultList();
-		em.close();
-		return foundItems;
 	}
 
 	public void cleanUp(){

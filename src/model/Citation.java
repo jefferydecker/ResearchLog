@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -33,26 +34,32 @@ public class Citation {
 	private String locDetail;
 
 	/*@ManyToOne
-	@JoinColumns({ @JoinColumn(name = "SRCID", referencedColumnName = "SRCID") })
-	private Source source;*/
+	@JoinColumns({ @JoinColumn(name = "SRCID", referencedColumnName = "SRCID") })*/
+	private Source source;
 
 	public Citation() {
 		super();
 		
 	}
 	
-	
-	public Citation(String srcId, LocalDate dateFound, String body, Source source) {
+
+	public Citation(int citeId, int srcId, LocalDate dateFound, String refBody, String locDetail, Source source) {
 		super();
+		this.citeId = citeId;
+		this.srcId = srcId;
+		this.dateFound = dateFound;
+		this.refBody = refBody;
+		this.locDetail = locDetail;
+		this.source = source;
 	}
 
-	public Citation(int citeId, int srcId, LocalDate dateFound, String refBody, String locDetail) {
 
-
-
-	public Citation(String srcId, LocalDate dateFound, String body, Source source) {
+	public Citation(String srcId, LocalDate ld, String body, Source source) {
 		// TODO Auto-generated constructor stub
 	}
+
+
+
 
 
 	public LocalDate getDateFound() {

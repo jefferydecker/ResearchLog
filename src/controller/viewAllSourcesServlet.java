@@ -7,19 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Source;
-
 /**
- * Servlet implementation class AddSourceServlet
+ * Servlet implementation class viewAllSourcesServlet
  */
-@WebServlet("/AddSourceServlet")
-public class AddSourceServlet extends HttpServlet {
+@WebServlet("/viewAllSourcesServlet")
+public class viewAllSourcesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddSourceServlet() {
+    public viewAllSourcesServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,23 +26,23 @@ public class AddSourceServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		SourceHelper dao = new SourceHelper();
+		request.setAttribute("allSources", dao.showAllSources());
+		
+		if(dao.showAllSources().isEmpty()){
+		request.setAttribute("allSources", " ");		
+		}
+		
+		getServletContext().getRequestDispatcher("/SourceList.jsp").forward(request, response);
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String title = request.getParameter("srcTitle");
-		String author = request.getParameter("srcAuthor");
-		String publication = request.getParameter("srcPublication");
-		String location = request.getParameter("srcLocation");
-		Source s = new Source(title, author, publication, location);
-		SourceHelper sh = new SourceHelper();
-		sh.insertSource(s);
-		getServletContext().getRequestDispatcher("/viewAllSourcesServlet").forward(request, response);
+		doGet(request, response);
 	}
 
 }
