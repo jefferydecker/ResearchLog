@@ -11,6 +11,7 @@
 <form method = "post" action = "">
 <table>
 <c:forEach items="${requestScope.allSources}" var="currentsource">
+	
 	<tr>
 	 <td><h4>-></h4></td>
 	 <td><h4>${currentsource.srcTitle}</h4></td>
@@ -27,10 +28,11 @@
  </c:forEach>
 </c:forEach>
 </table>
-<input type = "submit" value = "edit" name="doThisToItem">
-<input type = "submit" value = "delete" name="doThisToItem">
+<input type = "submit" value = "edit" name="doThisToCitation">
+<input type = "submit" value = "delete" name="doThisToCitation">
 <input type="submit" value = "add" name = "doThisToItem">
 </form>
+<a href="viewAllSourcesServlet">Show/Edit Sources</a><br>
 <a href="AddSource.jsp">Add a new Source</a><br>
 <a href="index.html">Home</a><br>
 </body>

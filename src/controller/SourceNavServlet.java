@@ -39,13 +39,17 @@ public class SourceNavServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String act = request.getParameter("doThisToSource");
 		SourceHelper dao = new SourceHelper();
 
+		String act = request.getParameter("doThisToSource");
 		
+			//troubleshooting
+			String selectedID = request.getParameter("id");
+			System.out.println("selectedID="+selectedID + ", act="+act);
+	
 		if (act == null) {
 		 //no button has been selected
-		getServletContext().getRequestDispatcher("/index.html").forward(request, response);
+		getServletContext().getRequestDispatcher("/viewAllSourcesServlet").forward(request, response);
 		
 		} else if (act.equals("delete")) {		
 			
@@ -53,7 +57,7 @@ public class SourceNavServlet extends HttpServlet {
 			Integer tempId = Integer.parseInt(request.getParameter("id"));
 			Source sourceToDelete = dao.searchForSourceById(tempId);
 			dao.deleteSource(sourceToDelete);
-			getServletContext().getRequestDispatcher("/index.html").forward(request, response);		
+			getServletContext().getRequestDispatcher("/viewAllSourcesServlet").forward(request, response);		
 			}
 			catch (NumberFormatException e) {
 				System.out.println("Forgot to click a button.");

@@ -57,14 +57,14 @@ public class EditSourceServlet extends HttpServlet {
 		String sourcePublication = request.getParameter("srcPublication");
 		String sourceLocation = request.getParameter("srcLocation");
 		
-		Integer tempId = Integer.parseInt(request.getParameter("id"));
+		Integer tempId = Integer.parseInt(request.getParameter("srcId"));
 		Source sourceToUpdate = dao.searchForSourceById(tempId);
 		sourceToUpdate.setSrcTitle(sourceTitle);
 		sourceToUpdate.setSrcAuthor(sourceAuthor);
 		sourceToUpdate.setSrcPublication(sourcePublication);
 		sourceToUpdate.setSrcLocation(sourceLocation);
 		dao.updateSource(sourceToUpdate);
-		getServletContext().getRequestDispatcher("/index.html").forward(request, response);
+		getServletContext().getRequestDispatcher("/viewAllSourcesServlet").forward(request, response);
 	}
 
 }

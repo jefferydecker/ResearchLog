@@ -8,25 +8,26 @@
 <title>Citation by Source List</title>
 </head>
 <body>
-<form method = "post" action = "">
+<form method = "post" action = "SourceNavServlet">
 <table>
 <c:forEach items="${requestScope.allSources}" var="currentsource">
 	<tr>
 	 <td><input type="radio" name="id" value="${currentsource.srcId}"></td>
-	 <td><h4>${currentsource.srcTitle}</h4></td>
+	 <td>${currentsource.srcTitle}</td>
 	 <td>${currentsource.srcAuthor}</td>
 	 <td>${currentsource.srcPublication}</td>
 	 <td>${currentsource.srcLocation}</td>
  	</tr>
 </c:forEach>
 </table>
-<input type = "submit" value = "edit" name="doThisToItem">
-<input type = "submit" value = "delete" name="doThisToItem">
+<input type = "submit" value = "edit" name="doThisToSource">
 <!-- 
-<input type = "submit" value = "add citation" name = "doThisToItem">
+<input type = "submit" value = "delete" name="doThisToSource">
 -->
+<input type = "submit" value = "add" name = "doThisToSource">
 </form>
-<a href="AddSource.jsp">Add a new Source</a><br />
+<p>Note: To delete a source, delete all of it's citations.</p>
+<a href="ViewAllServlet">Show/Edit/Delete all entries (sources and citations)</a><br>
 <a href="addSourceForCitationServlet">Add new Citation</a><br>
 <a href="index.html">Home</a><br>
 
