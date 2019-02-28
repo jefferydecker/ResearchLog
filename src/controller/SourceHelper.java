@@ -42,7 +42,8 @@ public class SourceHelper {
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
 		TypedQuery<Source> typedQuery = em.createQuery(
-				"select s from sources s where s.srcId = :selectedsrcId", Source.class);
+				"select s from Source s where s.srcId = :selectedsrcId", Source.class);
+
 		// Substitute parameter with actual data from the toDelete item
 		typedQuery.setParameter("selectedsrcId", toDelete.getSrcId());
 

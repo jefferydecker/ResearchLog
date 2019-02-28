@@ -63,8 +63,7 @@ public class SourceNavServlet extends HttpServlet {
 				System.out.println("Forgot to click a button.");
 			} 
 			finally {				
-				getServletContext().getRequestDispatcher("/index.html").forward(request, response);
-				
+				getServletContext().getRequestDispatcher("/viewAllSourcesServlet").forward(request, response);
 			}
 	
 		} else if (act.equals("edit")) {
@@ -75,7 +74,7 @@ public class SourceNavServlet extends HttpServlet {
 				request.setAttribute("sourceToEdit", sourceToEdit);
 				getServletContext().getRequestDispatcher("/EditSource.jsp").forward(request, response);
 				 } catch (NumberFormatException e) {
-				getServletContext().getRequestDispatcher("/index.html").
+				getServletContext().getRequestDispatcher("/viewAllSourcesServlet").
 				forward(request, response);
 				 }
 		} else if (act.equals("add")) {

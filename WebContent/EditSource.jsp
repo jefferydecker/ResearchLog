@@ -15,6 +15,7 @@
 		<input type="hidden" name="srcId" value="${sourceToEdit.srcId}"> 
 		<input type="submit" value="Save Edited Source">
 	</form><br>
+	<a href="viewAllSourcesServlet">Back to Show/Edit Sources</a><br>
 	<a href="index.html">Home</a>
 </body>
 </html>

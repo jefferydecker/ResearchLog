@@ -30,7 +30,7 @@ public class Source {
 	private String srcLocation;
 	
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="SRCID")
+	@JoinColumn(name="srcid")
 	private List<Citation> citationList;
 	
 	

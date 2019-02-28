@@ -21,12 +21,10 @@
 </c:forEach>
 </table>
 <input type = "submit" value = "edit" name="doThisToSource">
-<!-- 
 <input type = "submit" value = "delete" name="doThisToSource">
--->
 <input type = "submit" value = "add" name = "doThisToSource">
 </form>
-<p>Note: To delete a source, delete all of it's citations.</p>
+<p>Note: Deleting a source will delete all of it's citations.</p>
 <a href="ViewAllServlet">Show/Edit/Delete all entries (sources and citations)</a><br>
 <a href="addSourceForCitationServlet">Add new Citation</a><br>
 <a href="index.html">Home</a><br>

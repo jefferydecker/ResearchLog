@@ -8,7 +8,7 @@
 <title>Citation by Source List</title>
 </head>
 <body>
-<form method = "post" action = "/CitationNavServlet">
+<form method = "post" action = "CitationNavServlet">
 <table>
 <c:forEach items="${requestScope.allSources}" var="currentsource">
 	
@@ -30,7 +30,7 @@
 </table>
 <input type = "submit" value = "edit" name="doThisToCitation">
 <input type = "submit" value = "delete" name="doThisToCitation">
-<input type="submit" value = "add" name = "doThisToItem">
+<input type = "submit" value = "add" name = "doThisToCitation">
 </form>
 <a href="viewAllSourcesServlet">Show/Edit Sources</a><br>
 <a href="AddSource.jsp">Add a new Source</a><br>

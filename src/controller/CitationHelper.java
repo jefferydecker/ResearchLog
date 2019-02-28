@@ -33,8 +33,8 @@ public class CitationHelper {
 	public void deleteCitation(Citation	toDelete) {
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
-		TypedQuery<Citation> typedQuery = em.createQuery("select c from " +
-			"Citation c where c.refId = :selectedRefId", Citation.class);
+		TypedQuery<Citation> typedQuery = em.createQuery(
+				"select c from Citation c where c.refId = :selectedRefId", Citation.class);
 		
 		//Substitute parameter with actual data from the toDelete item
 		typedQuery.setParameter("selectedRefId", toDelete.getRefId());
