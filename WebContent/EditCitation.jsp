@@ -5,11 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Add Citation</title>
+<title>Edit Citation</title>
 </head>
 <body>
 <h3>Add Citation</h3><br>
-<form action = "AddCitationServlet" method="post">
+<form action = "EditCitationServlet" method="post">
 Available Sources: 
 	<select name="allSources">
 		<c:forEach items="${requestScope.allSources}" var="currentsource">

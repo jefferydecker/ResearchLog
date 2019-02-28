@@ -8,7 +8,7 @@
 <title>Citation by Source List</title>
 </head>
 <body>
-<form method = "post" action = "">
+<form method = "post" action = "/CitationNavServlet">
 <table>
 <c:forEach items="${requestScope.allSources}" var="currentsource">
 	

@@ -7,7 +7,7 @@
 <title>Source Editor</title>
 </head>
 <body>
-<form action="EditSourceServlet" method="post">
+	<form action = "EditSourceServlet" method="post">
 		Title: <input type="text" name="srcTitle" value="${sourceToEdit.srcTitle}">
 		Author: <input type="text" name="srcAuthor" value="${sourceToEdit.srcAuthor}">
 		Publication: <input type="text" name="srcPublication" value="${sourceToEdit.srcPublication}">
