@@ -33,35 +33,34 @@ public class AddCitationServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String srcId = request.getParameter("srcId");	
-		String body = request.getParameter("refBody");
-		String location = request.getParameter("locDetail");
-		String source = request.getParameter("source");
+	String srcId = request.getParameter("allSources");
+		
 		String month = request.getParameter("month");
 		String day = request.getParameter("day");
 		String year = request.getParameter("year");
-		LocalDate ld;
+
+		LocalDate dateFound;
 		try {
-			ld = LocalDate.of(Integer.parseInt(year),
+			dateFound = LocalDate.of(Integer.parseInt(year),
 					Integer.parseInt(month), Integer.parseInt(day));
 		} catch(NumberFormatException ex) {
-			ld = LocalDate.now();
+			dateFound = LocalDate.now();
 		}
-		SourceHelper sh = new SourceHelper();
-		List<Source> sourceList  = sh.showAllSources();
-		int temp = 0;
-		for(int i = 0; i < sourceList.size(); i++) {
-			if(sourceList.get(i).getSrcId() == Integer.parseInt(srcId)) {
-				temp = i;			
-			}
-		}
+
+		String refBody = request.getParameter("refBody");
+		String locDetail = request.getParameter("locDetail");
+		Citation c = new Citation(Integer.parseInt(srcId), dateFound, refBody, locDetail);
+		CitationHelper ch = new CitationHelper();
+		ch.insertCitation(c);
 		
-		Citation c = new Citation(srcId, ld, body, sourceList.get(temp));
-		CitationHelper dao = new CitationHelper();
-		dao.insertCitation(c);
-		getServletContext().getRequestDispatcher("/ViewAllCitationsServlet").forward(request, response);
+		SourceHelper sh = new SourceHelper();
+		request.setAttribute("allSources", sh.showAllSources());
+		
+		getServletContext().getRequestDispatcher("/AddCitation.jsp").forward(request, response);
+
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

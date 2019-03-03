@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,13 +25,13 @@ public class Source {
 	private String srcTitle;
 	@Column(name="author")
 	private String srcAuthor;
+	
 	@Column(name="publication")
 	private String srcPublication;
 	@Column(name="srcloc")
 	private String srcLocation;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="SRCID")
+	@OneToMany(cascade = CascadeType.ALL)	
 	private List<Citation> citationList;
 	
 	
@@ -80,8 +81,10 @@ public class Source {
 	public int getSrcId() {
 		return srcId;
 	}
-
 	
-	
+	@Override
+	public String toString() {
+		return "Source [srcId=" + srcId + ", srcTitle=" + srcTitle + ", srcAuthor=" + srcAuthor + "]";
+	}
 	
 }

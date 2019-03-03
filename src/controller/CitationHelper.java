@@ -26,12 +26,9 @@ public class CitationHelper {
 	
 	public	List<Citation> showAllCitations() {
 		EntityManager	em	=	emfactory.createEntityManager();
-
-		List<Citation> allCitations = em.createQuery("SELECT i FROM Citation i").getResultList();
-		return	allCitations;
-		}
-
-
+		List<Citation> allItems = em.createQuery("SELECT i FROM Citation i").getResultList();
+		return	allItems;
+	}
 
 	public void deleteCitation(Citation	toDelete) {
 		EntityManager em = emfactory.createEntityManager();
@@ -40,8 +37,7 @@ public class CitationHelper {
 			"Citation c where c.refId = :selectedRefId", Citation.class);
 		
 		//Substitute parameter with actual data from the toDelete item
-		typedQuery.setParameter("selectedRefId", toDelete.getCiteID());
-
+		typedQuery.setParameter("selectedRefId", toDelete.getRefId());
 		
 		//we only want one result
 		typedQuery.setMaxResults(1);
@@ -55,8 +51,7 @@ public class CitationHelper {
 		em.close();
 	}
 
-
-	public Citation searchForCitationByRefId(int idToEdit) {
+	public Citation searchForCitationById(int idToEdit) {
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
 		Citation found = em.find(Citation.class, idToEdit);
@@ -71,6 +66,8 @@ public class CitationHelper {
 		em.getTransaction().commit();
 		em.close();
 	}
+
+
 	
 	public void cleanUp(){
 		emfactory.close();

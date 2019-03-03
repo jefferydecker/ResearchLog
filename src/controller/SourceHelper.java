@@ -36,21 +36,30 @@ public class SourceHelper {
 				em.createQuery("SELECT s FROM Source s").getResultList();
 		return allSources;
 	}
-
+	
+//--------------------------------/
 	public void deleteSource(Source toDelete) {
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
 		TypedQuery<Source> typedQuery = em.createQuery(
-				"select s from sources s where s.srcId = :selectedsrcId", Source.class);
+				"select s from Source s where s.srcId = :selectedsrcId", Source.class);
 		// Substitute parameter with actual data from the toDelete item
 		typedQuery.setParameter("selectedsrcId", toDelete.getSrcId());
-
+		
+		
 		// we only want one result
 		typedQuery.setMaxResults(1);
 
 		// get the result and save it into a new list item
 		Source result = typedQuery.getSingleResult();
-
+		
+		CitationHelper ch = new CitationHelper();
+		
+		for(int i = 0; i < result.getCitationList().size(); i++) {
+			
+			ch.deleteCitation(result.getCitationList().get(i));
+		}
+		result.setCitationList(null);
 		// remove it
 		em.remove(result);
 		em.getTransaction().commit();
@@ -68,6 +77,19 @@ public class SourceHelper {
 		em.close();
 	}
 
+	public List<Source> searchForSourceByTitle(String title) {
+		// TODO Auto-generated method stub
+		EntityManager em = emfactory.createEntityManager();
+		em.getTransaction().begin();
+		TypedQuery<Source> typedQuery = em.createQuery(
+				"select r from sources s where s.title = :selectedTitle", Source.class);
+		typedQuery.setParameter("selectedTitle", title);
+
+		List<Source> foundItems = typedQuery.getResultList();
+		em.close();
+		return foundItems;
+	}
+
 	public void cleanUp(){
 		emfactory.close();
 	
@@ -79,11 +101,12 @@ public class SourceHelper {
 		em.getTransaction().begin();
 		TypedQuery<Citation> typedQuery = em.createQuery(
 				"select c from Citation c where c.srcId = :selectedsrcId", Citation.class);
-		typedQuery.setParameter("selectedsrcId", sourceToView);
+		typedQuery.setParameter("selectedsrcId", sourceToView.getSrcId());
 		List<Citation> foundCitations = typedQuery.getResultList();
 		em.close();
-		System.out.println(foundCitations.toString());
 		return foundCitations;
 	}
 
+//--------------------------------/
+	
 }

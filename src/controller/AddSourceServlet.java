@@ -44,7 +44,7 @@ public class AddSourceServlet extends HttpServlet {
 		Source s = new Source(title, author, publication, location);
 		SourceHelper sh = new SourceHelper();
 		sh.insertSource(s);
-		getServletContext().getRequestDispatcher("/viewAllSourcesServlet").forward(request, response);
+		getServletContext().getRequestDispatcher("/index.html").forward(request, response);
 	}
 
 }

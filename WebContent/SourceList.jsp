@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="style.css">
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
-<form method="post" action="SourceNavServlet">
+<h1>Sources</h1>
+	<form method="post" action="SourceNavServlet">
 		<table>
 			<c:forEach items="${requestScope.allSources}" var="currentsource">
 				<tr>
@@ -20,10 +22,13 @@
 				</tr>
 			</c:forEach>
 		</table>
-		<input type="submit" value="add" name="doThisToSource">
-		<input type="submit" value="edit" name="doThisToSource"> 
-		<input type="submit" value="delete" name="doThisToSource"> 		
-		<input type="submit" value="view citations" name="doThisToSource">	
+		<input type="submit" value="add source" name="doThisToSource">
+		<input type="submit" value="edit source" name="doThisToSource"> 	
+		<input type="submit" value="view source citations" name="doThisToSource">	
+		<input type="submit" value="add new citation" name="doThisToSource">
 	</form><br>
+	
+	<a href="index.html">Home</a>
+	
 </body>
 </html>

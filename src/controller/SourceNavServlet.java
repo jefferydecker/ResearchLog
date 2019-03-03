@@ -47,50 +47,60 @@ public class SourceNavServlet extends HttpServlet {
 		 //no button has been selected
 		getServletContext().getRequestDispatcher("/index.html").forward(request, response);
 		
-		} else if (act.equals("delete")) {		
-			
+		} else if (act.equals("delete source")) {		
+
 			try {
 			Integer tempId = Integer.parseInt(request.getParameter("id"));
 			Source sourceToDelete = dao.searchForSourceById(tempId);
 			dao.deleteSource(sourceToDelete);
-			getServletContext().getRequestDispatcher("/index.html").forward(request, response);		
+			
+			getServletContext().getRequestDispatcher("/viewAllSourcesServlet").forward(request, response);		
 			}
 			catch (NumberFormatException e) {
 				System.out.println("Forgot to click a button.");
 			} 
 			finally {				
-				getServletContext().getRequestDispatcher("/index.html").forward(request, response);
+				getServletContext().getRequestDispatcher("/viewAllSourcesServlet").forward(request, response);
 				
 			}
 	
-		} else if (act.equals("edit")) {
+		} else if (act.equals("edit source")) {
 			
 			try {
-				Integer tempId = Integer.parseInt(request.getParameter("id"));
-				Source sourceToEdit = dao.searchForSourceById(tempId);
+				String tempId =(request.getParameter("id"));
+				
+				Source sourceToEdit = dao.searchForSourceById(Integer.parseInt(tempId));
 				request.setAttribute("sourceToEdit", sourceToEdit);
 				getServletContext().getRequestDispatcher("/EditSource.jsp").forward(request, response);
 				 } catch (NumberFormatException e) {
-				getServletContext().getRequestDispatcher("/index.html").
+				getServletContext().getRequestDispatcher("/viewAllSourcesServlet.html").
 				forward(request, response);
 				 }
-		} else if (act.equals("add")) {
+		} else if (act.equals("add source")) {
 			getServletContext().getRequestDispatcher("/AddSource.jsp").forward(request, response);
 		}
-		else if (act.equals("view source")) {
+		else if (act.equals("view source citations")) {
 			try {
 				Integer tempId = Integer.parseInt(request.getParameter("id"));
 				Source sourceToView = dao.searchForSourceById(tempId);
 				
 				List<Citation> sourceCitations = dao.viewSourceCitations(sourceToView);
-				request.setAttribute("sourceCitations", sourceCitations	);
-				request.setAttribute("bandName", sourceToView);
-				getServletContext().getRequestDispatcher("/citation-by-source.jsp").forward(request, response);		
+				request.setAttribute("citationList", sourceCitations);
+				request.setAttribute("srcTitle", sourceToView.getSrcTitle());
+				request.setAttribute("srcId", sourceToView.getSrcId());
+				request.setAttribute("sourceToView", sourceToView);
+				getServletContext().getRequestDispatcher("/CitationList.jsp").forward(request, response);		
 				}
 				catch (NumberFormatException e) {
 					System.out.println("Forgot to click a button.");
 				} 
 		}
+		else if (act.equals("add new citation")) {
+			SourceHelper sh = new SourceHelper();
+			request.setAttribute("allSources", sh.showAllSources());
+			
+			
+			getServletContext().getRequestDispatcher("/AddCitation.jsp").forward(request, response);
+		}
 	}
-
 }

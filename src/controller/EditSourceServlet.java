@@ -30,12 +30,8 @@ public class EditSourceServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//----------------
-
-
-		CitationHelper ch = new CitationHelper();
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	CitationHelper ch = new CitationHelper();
 		List<Citation> abc = ch.showAllCitations();
 		request.setAttribute("allItems", abc);
 
@@ -43,9 +39,9 @@ public class EditSourceServlet extends HttpServlet {
 			request.setAttribute("allItems", " ");
 		}
 
-		getServletContext().getRequestDispatcher("/citation-by-source.jsp").forward(request, response);
+		getServletContext().getRequestDispatcher("/CitationList.jsp").forward(request, response);
 		//----------------
-
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -56,16 +52,16 @@ public class EditSourceServlet extends HttpServlet {
 		String sourceTitle = request.getParameter("srcTitle");
 		String sourceAuthor = request.getParameter("srcAuthor");
 		String sourcePublication = request.getParameter("srcPublication");
-		String sourceLocation = request.getParameter("srcLocation");
+		String sourceLocation = request.getParameter("srcLocation");		
+		String tempId = request.getParameter("srcId");
 		
-		Integer tempId = Integer.parseInt(request.getParameter("id"));
-		Source sourceToUpdate = dao.searchForSourceById(tempId);
+		Source sourceToUpdate = dao.searchForSourceById(Integer.parseInt(tempId));
 		sourceToUpdate.setSrcTitle(sourceTitle);
 		sourceToUpdate.setSrcAuthor(sourceAuthor);
 		sourceToUpdate.setSrcPublication(sourcePublication);
 		sourceToUpdate.setSrcLocation(sourceLocation);
 		dao.updateSource(sourceToUpdate);
-		getServletContext().getRequestDispatcher("/index.html").forward(request, response);
+		getServletContext().getRequestDispatcher("/viewAllSourcesServlet").forward(request, response);
 	}
 
 }
